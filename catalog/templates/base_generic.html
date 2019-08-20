@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-
-  {% block title %}<title>Local Library</title>{% endblock %}
   <meta charset="utf-8">
+
+  {% block title %}<title>北航校医院在线预约</title>{% endblock %}
 
   <!-- Add additional CSS in static file -->
   {% load static %}
@@ -12,16 +12,6 @@
 </head>
 
 <body>
-
-  <div class="container-fluid">
-
-    <div class="row">
-      <div class="col-sm-10 ">
-      {% block content %}{% endblock %}
-      </div>
-    </div>
-
-  </div>
-
+  {% block content %}{% endblock %}
 </body>
 </html>

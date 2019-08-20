@@ -1,8 +1,12 @@
 {% extends "base_generic.html" %}
 {% block content %}
 
-  <h1>北京航空航天大学校医院在线预约系统</h1>
-  <a href="{% url 'reserve' %}">我要预约</a>
-  <a href="{% url 'inquiry' %}">我要查询</a>
+  <div class="sign-up-modal">
+    <h1>北京航空航天大学校医院在线预约系统</h1>
+    <div class="center">
+      <button id="white-button" onclick="location.href='{% url 'reserve' %}'">我要预约</button>
+      <button id="white-button" onclick="location.href='{% url 'inquiry' %}'">我要查询</button>
+    </div>
+  </div>
 
 {% endblock %}

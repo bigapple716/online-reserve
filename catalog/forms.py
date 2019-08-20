@@ -9,6 +9,7 @@ class ReservationForm(forms.ModelForm):
     class Meta:
         model = Applicant
         fields = '__all__'
+        labels = {'name': '姓名', 'gov_id': '身份证号', 'contact': '联系方式', 'date': '预约时段'}
 
     # check gov_id
     def clean_gov_id(self):
@@ -19,7 +20,7 @@ class ReservationForm(forms.ModelForm):
             raise ValidationError('无效身份证号！')
 
         # check format
-        if data.isdigit() or (data[:-1].isdigit() and data[-1] == 'x'):
+        if data.isdigit() or (data[:-1].isdigit() and (data[-1] == 'x' or data[-1] == 'X')):
             pass
         else:
             raise ValidationError('无效身份证号！')
@@ -40,7 +41,7 @@ class ReservationForm(forms.ModelForm):
 
 
 class InquiryForm(forms.Form):
-    gov_id = forms.CharField(max_length=18, help_text='请输入您的身份证号')
+    gov_id = forms.CharField(max_length=18, label='身份证号')
 
     # check gov_id
     def clean_gov_id(self):
@@ -51,7 +52,7 @@ class InquiryForm(forms.Form):
             raise ValidationError('无效身份证号！')
 
         # check format
-        if data.isdigit() or (data[:-1].isdigit() and data[-1] == 'x'):
+        if data.isdigit() or (data[:-1].isdigit() and (data[-1] == 'x' or data[-1] == 'X')):
             pass
         else:
             raise ValidationError('无效身份证号！')

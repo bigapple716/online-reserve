@@ -32,9 +32,6 @@ def reserve(request):
             # redirect to URL:
             return HttpResponseRedirect(reverse('reserve-success'))
 
-        # else:
-        #     return render(request, 'catalog/reserve-fail.html', {'err_msg': })
-
     else:
         # request.method != 'POST'
         # 当什么信息都没有提交的时候，显示空白输入框
