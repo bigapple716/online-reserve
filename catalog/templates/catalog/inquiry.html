@@ -10,8 +10,9 @@
           {{ form }}
         </table>
         <button id="white-button" type="submit">提交</button>
+        <button id="white-button" onclick="location.href='{% url 'index' %}'">返回</button>
     </form>
-    <button id="return-button" onclick="location.href='{% url 'index' %}'">返回</button>
+
   </div>
 
 {% endblock %}
