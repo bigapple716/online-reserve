@@ -5,12 +5,30 @@
     <h1>我要预约</h1>
     
     <form action="" method="post">
-        {% csrf_token %}
-        <table>
-          {{ form }}
-        </table>
-        <button id="white-button" type="submit">提交</button>
-        <button id="white-button" onclick="location.href='{% url 'index' %}'">返回</button>
+      {% csrf_token %}
+
+      <table>
+        {{ form }}
+      </table>
+
+      <button id="white-button" type="submit">提交</button>
+      <button id="white-button" onclick="location.href='{% url 'index' %}'">返回</button>
+
+      <br>
+
+      <table class="center">
+        <tr>
+          <td>时间段</td>
+          <td>剩余名额</td>
+        </tr>
+        {% for t, a in avail_list %}
+          <tr>
+            <td>{{ t }}</td>
+            <td>{{ a }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+
     </form>
   </div>
 

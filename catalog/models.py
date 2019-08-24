@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 
 
@@ -5,7 +7,7 @@ from django.db import models
 class Service(models.Model):
     # fields
     date = models.CharField(max_length=100, primary_key=True)
-    quota = models.IntegerField()
+    quota = models.IntegerField(default=0)  # 该时间段的总名额
 
 
 class Applicant(models.Model):

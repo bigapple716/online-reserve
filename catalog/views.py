@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 from .forms import ReservationForm, InquiryForm
-from .models import Applicant
+from .models import Applicant, Service
 
 
 # home page
@@ -37,7 +37,12 @@ def reserve(request):
         # 当什么信息都没有提交的时候，显示空白输入框
         form = ReservationForm(initial={})
 
-    return render(request, 'catalog/reserve.html', {'form': form})
+    avail_list = []
+    for service in list(Service.objects.all()):
+        time_avail = (service.date, service.quota - len(Applicant.objects.order_by().values('date').distinct()))
+        avail_list.append(time_avail)
+
+    return render(request, 'catalog/reserve.html', {'form': form, 'avail_list': avail_list})
 
 
 # reserve-success
