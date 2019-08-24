@@ -39,7 +39,7 @@ def reserve(request):
 
     avail_list = []
     for service in list(Service.objects.all()):
-        time_avail = (service.date, service.quota - len(Applicant.objects.order_by().values('date').distinct()))
+        time_avail = (service.date, service.quota - len(list(Applicant.objects.filter(date__exact=service.date))))
         avail_list.append(time_avail)
 
     return render(request, 'catalog/reserve.html', {'form': form, 'avail_list': avail_list})
