@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 import datetime
-from .models import Applicant
+from .models import Applicant, Service
 
 
 class ReservationForm(forms.ModelForm):
@@ -29,9 +29,9 @@ class ReservationForm(forms.ModelForm):
 
     # check date
     def clean_date(self):
-        threshold = 1
-
         data = self.cleaned_data['date']
+
+        threshold = list(Service.objects.filter(date__exact=data))[0].quota
 
         same_date = list(Applicant.objects.filter(date__exact=data))
         if len(same_date) >= threshold:
