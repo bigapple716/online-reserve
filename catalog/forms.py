@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from django import forms
 from django.core.exceptions import ValidationError
-import datetime
 from .models import Applicant, Service
 
 
@@ -31,9 +32,9 @@ class ReservationForm(forms.ModelForm):
     def clean_date(self):
         data = self.cleaned_data['date']
 
-        threshold = list(Service.objects.filter(date__exact=data))[0].quota
+        threshold = list(Service.objects.filter(date__exact=data))[0].quota  # data这个时间段对应的预约上限
 
-        same_date = list(Applicant.objects.filter(date__exact=data))
+        same_date = list(Applicant.objects.filter(date__exact=data))  # data这个时间段的已有预约列表
         if len(same_date) >= threshold:
             raise ValidationError('该时间段已约满，请选择其他时间段！')
 

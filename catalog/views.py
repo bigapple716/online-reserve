@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-import datetime
 from .forms import ReservationForm, InquiryForm
 from .models import Applicant, Service
 
@@ -27,7 +28,7 @@ def reserve(request):
             applicant.gov_id = form.cleaned_data['gov_id']
             applicant.contact = form.cleaned_data['contact']
             applicant.date = form.cleaned_data['date']
-            applicant.save()
+            applicant.save()  # 写数据库
 
             # redirect to URL:
             return HttpResponseRedirect(reverse('reserve-success'))
@@ -37,7 +38,7 @@ def reserve(request):
         # 当什么信息都没有提交的时候，显示空白输入框
         form = ReservationForm(initial={})
 
-    avail_list = []
+    avail_list = []  # （时间段，剩余名额）的list
     for service in list(Service.objects.all()):
         time_avail = (service.date, service.quota - len(list(Applicant.objects.filter(date__exact=service.date))))
         avail_list.append(time_avail)
